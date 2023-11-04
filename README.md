@@ -13,6 +13,8 @@
 - Or, install the `Python` extension on **VS Code** and run using the *play* button icon on the top right corner of VS Code.
 - Alternatively, you can access **Jupyter** notebook and upload, then run the file.
 
+<br>
+
 Pongify's code logic is divided into three main parts:
 ## Part 01 - Scheduler
 - Firstly, it takes user input for the number of players, from *two* to *five*.
