@@ -80,16 +80,3 @@ Pongify then creates a points table (a 2d list) to account for:
 - The list is not sorted based on results and standings.
 - The final points table rows can be sorted based on points and points difference.
 
-
-## Project Details
-
-Faculty: Faculty of Information.
-University: University of Toronto.
-Program: BI – Bachelor of Information.
-Course: INF452 - Information Design V - Coding.
-Instructor: Dr. Maher Elshakankiri.
-Student: Syed-Mughira Hassan.
-Assignment: Mid-term.
-Programming Language: Python.
-Date Created: 31-Oct-2023.
-Date Modified: 04-Nov-2023.
