@@ -1,14 +1,3 @@
-# Faculty of Information
-# University of Toronto
-# BI – Bachelor of Information
-# Course: INF452 - Information Design V: Coding
-# Instructor: Dr. Maher Elshakankiri
-# Student: Syed-Mughira Hassan
-# Assignment: Mid-term
-# Programming Language: Python
-# Date Created: 31-Oct-2023
-# Date Modified:  04-Nov-2023 
-
 # ----------------------- Pongify - Program ----------------------- #
 
 # ----------------------- Imports #
@@ -190,12 +179,3 @@ for row in pointsTable:
     print(row)
 
 print("")
-
-# Is limited to single player names not doubles or teams, can be improved to incorporate teams and member names
-# The current setup does not support editing/updating or deleting results, can add that functionality
-# The command line interface is not user friendly, can use Flask or Django to create a web based UI written in Python
-# Need to improve code validation
-# Can validate and make sure player names are only strings
-# Can store calculation logic in a function and use it for player02
-# The list is not sorted based on results and standings
-# The final points table rows can be sorted based on points and points difference
