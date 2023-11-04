@@ -7,7 +7,13 @@
 - Pongify only features games and tournaments for 2 to 5 players.
 <br>
 
-It's code logic can be divided into three main parts.
+## Run the program
+
+- Copy all the contents of the `pongify.py` file, then paste the content into a Google Collab python file.
+- Or, install the `Python` extension on **VS Code** and run using the *play* button icon on the top right corner of VS Code.
+- Alternatively, you can access **Jupyter** notebook and upload, then run the file.
+
+Pongify's code logic is divided into three main parts:
 ## Part 01 - Scheduler
 - Firstly, it takes user input for the number of players, from *two* to *five*.
 - Based on the number of players, it asks the name of each player, capturing the player names in a list called "**players**".
