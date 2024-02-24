@@ -15,8 +15,10 @@
   color: #f5f5f5 !important; /* Light text */
 }
       main {
-        padding: 20px;
-      }
+  padding: 20px;
+  width: 50%;
+  margin: 0 auto;
+}
       .form-group {
         margin-bottom: 1em;
       }
@@ -69,11 +71,19 @@
         background-color: #45a049; /* Darker green */
       }
       /* Responsive styles */
+      @media (max-width: 992px) {
+  main {
+    width: 80%;
+  }
+}
+      
 @media screen and (max-width: 600px) {
   body {
     font-size: 16pt !important; /* Adjust font size for smaller screens */
   }
-
+  main {
+    width: 100%;
+  }
   .form-group input {
     width: 100% !important;
   }
