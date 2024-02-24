@@ -32,8 +32,8 @@
         color: #f5f5f5; /* Light text */
         border: 1px solid #f5f5f5; /* Light border */
       }
-      #schedule {
-        margin-top: 2em;
+      input[type="number"] {
+        width: 300px;
       }
       table {
         width: 100%;
@@ -100,10 +100,13 @@
         <input type="number" id="numRounds" min="1" max="3" />
       </div>
       <button onclick="generateSchedule()">Generate Schedule</button>
+      <hr>
       <div id="schedule"></div>
+      <hr>
 
       <div id="matchInputs"></div>
       <button onclick="calculateResults()">Calculate Results</button>
+      <hr>
       <table id="pointsTable">
         <thead>
           <tr>
@@ -176,21 +179,25 @@
         );
       }
 
-      numPlayersInput.addEventListener("change", function () {
-        const numPlayers = numPlayersInput.value;
-        playerInputsDiv.innerHTML = "";
-        for (let i = 0; i < numPlayers; i++) {
-          const div = document.createElement("div");
-          div.className = "form-group";
-          const label = document.createElement("label");
-          label.textContent = `Enter player/team ${i + 1} name:`;
-          const input = document.createElement("input");
-          input.id = `player${i + 1}`;
-          div.appendChild(label);
-          div.appendChild(input);
-          playerInputsDiv.appendChild(div);
-        }
-      });
+     numPlayersInput.addEventListener("change", function () {
+  const numPlayers = numPlayersInput.value;
+  playerInputsDiv.innerHTML = "";
+  for (let i = 0; i < numPlayers; i++) {
+    const div = document.createElement("div");
+    div.className = "form-group";
+    const label = document.createElement("label");
+    label.textContent = `Enter player/team ${i + 1} name:`;
+    const input = document.createElement("input");
+    input.id = `player${i + 1}`;
+    div.appendChild(label);
+    div.appendChild(input);
+    playerInputsDiv.appendChild(div);
+  }
+  // Set focus on the first newly created input box
+  if (numPlayers > 0) {
+    document.getElementById(`player1`).focus();
+  }
+});
 
       numPlayersInput.addEventListener("input", validateNumPlayersInput);
       numRoundsInput.addEventListener("input", validateNumRoundsInput);
@@ -227,17 +234,19 @@
           const div = document.createElement("div");
           div.className = "form-group";
           const label = document.createElement("label");
-          label.textContent = `Enter score for Match ${index + 1}: ${
+          label.innerHTML = `Enter score for Match ${index + 1}: <br>${
             combination[0]
           } vs ${combination[1]}`;
           const input1 = document.createElement("input");
           input1.id = `match${index + 1}player1Score`;
           input1.type = "number";
+          input1.style.width = "200px";
           input1.addEventListener("input", validateMatchScores);
 
           const input2 = document.createElement("input");
           input2.id = `match${index + 1}player2Score`;
           input2.type = "number";
+          input2.style.width = "200px"; 
           input2.addEventListener("input", validateMatchScores);
 
           div.appendChild(label);
@@ -249,64 +258,70 @@
       }
 
       function calculateResults() {
-        if (!validateInputs()) {
-          return;
-        }
+  if (!validateInputs()) {
+    return;
+  }
 
-        const numMatches = matchInputsDiv.children.length;
-        const pointsTable = players.map(function (player) {
-          return {
-            name: player,
-            W: 0,
-            L: 0,
-            PF: 0,
-            PA: 0,
-            PD: 0,
-            Points: 0,
-          };
-        });
-        for (let i = 0; i < numMatches; i++) {
-          const player1ScoreInput = document.getElementById(
-            `match${i + 1}player1Score`
-          );
-          const player2ScoreInput = document.getElementById(
-            `match${i + 1}player2Score`
-          );
-          const player1Score = parseInt(player1ScoreInput.value);
-          const player2Score = parseInt(player2ScoreInput.value);
-          const player1 = pointsTable.find(function (player) {
-            return player.name === combinations[i][0];
-          });
-          const player2 = pointsTable.find(function (player) {
-            return player.name === combinations[i][1];
-          });
-          player1.PF += player1Score;
-          player1.PA += player2Score;
-          player1.PD = player1.PF - player1.PA;
-          player2.PF += player2Score;
-          player2.PA += player1Score;
-          player2.PD = player2.PF - player2.PA;
-          if (player1Score > player2Score) {
-            player1.W++;
-            player1.Points += 3;
-            player2.L++;
-          } else {
-            player2.W++;
-            player2.Points += 3;
-            player1.L++;
-          }
-        }
-        pointsTableBody.innerHTML = "";
-        pointsTable.forEach(function (player) {
-          const tr = document.createElement("tr");
-          Object.values(player).forEach(function (value) {
-            const td = document.createElement("td");
-            td.textContent = value;
-            tr.appendChild(td);
-          });
-          pointsTableBody.appendChild(tr);
-        });
-      }
+  const numMatches = matchInputsDiv.children.length;
+  const pointsTable = players.map(function (player) {
+    return {
+      name: player,
+      W: 0,
+      L: 0,
+      PF: 0,
+      PA: 0,
+      PD: 0,
+      Points: 0,
+    };
+  });
+  for (let i = 0; i < numMatches; i++) {
+    const player1ScoreInput = document.getElementById(
+      `match${i + 1}player1Score`
+    );
+    const player2ScoreInput = document.getElementById(
+      `match${i + 1}player2Score`
+    );
+    const player1Score = parseInt(player1ScoreInput.value);
+    const player2Score = parseInt(player2ScoreInput.value);
+    const player1 = pointsTable.find(function (player) {
+      return player.name === combinations[i][0];
+    });
+    const player2 = pointsTable.find(function (player) {
+      return player.name === combinations[i][1];
+    });
+    player1.PF += player1Score;
+    player1.PA += player2Score;
+    player1.PD = player1.PF - player1.PA;
+    player2.PF += player2Score;
+    player2.PA += player1Score;
+    player2.PD = player2.PF - player2.PA;
+    if (player1Score > player2Score) {
+      player1.W++;
+      player1.Points += 3;
+      player2.L++;
+    } else {
+      player2.W++;
+      player2.Points += 3;
+      player1.L++;
+    }
+  }
+  pointsTable.sort((a, b) => {
+    if (b.Points !== a.Points) {
+      return b.Points - a.Points;
+    }
+    return b.PD - a.PD;
+  });
+  pointsTableBody.innerHTML = "";
+  pointsTable.forEach(function (player) {
+    const tr = document.createElement("tr");
+    Object.values(player).forEach(function (value) {
+      const td = document.createElement("td");
+      td.textContent = value;
+      tr.appendChild(td);
+    });
+    pointsTableBody.appendChild(tr);
+  });
+}
     </script>
   </body>
 </html>
