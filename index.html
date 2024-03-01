@@ -102,9 +102,9 @@
       <h2>Syed's Tournament Scheduler</h4>
       <div class="form-group">
         <label for="numPlayers"
-          >Enter number of players/teams from (2-5):</label
+          >Enter number of players/teams from (2-9):</label
         >
-        <input type="number" id="numPlayers" min="2" max="5" />
+        <input type="number" id="numPlayers" min="2" max="9" />
       </div>
       <div id="playerInputs"></div>
       <div class="form-group">
@@ -152,7 +152,7 @@
       function validateNumPlayersInput() {
         const numPlayers = numPlayersInput.value;
         const isValid =
-          !isNaN(numPlayers) && numPlayers >= 2 && numPlayers <= 5;
+          !isNaN(numPlayers) && numPlayers >= 2 && numPlayers <= 9;
         numPlayersInput.style.borderColor = isValid ? "" : "red";
         return isValid;
       }
@@ -191,25 +191,39 @@
         );
       }
 
-     numPlayersInput.addEventListener("change", function () {
-  const numPlayers = numPlayersInput.value;
-  playerInputsDiv.innerHTML = "";
-  for (let i = 0; i < numPlayers; i++) {
-    const div = document.createElement("div");
-    div.className = "form-group";
-    const label = document.createElement("label");
-    label.textContent = `Enter player/team ${i + 1} name:`;
-    const input = document.createElement("input");
-    input.id = `player${i + 1}`;
-    div.appendChild(label);
-    div.appendChild(input);
-    playerInputsDiv.appendChild(div);
-  }
-  // Set focus on the first newly created input box
-  if (numPlayers > 0) {
-    document.getElementById(`player1`).focus();
-  }
-});
+      function shuffle(array) {
+        var currentIndex = array.length, temporaryValue, randomIndex;
+        while (0 !== currentIndex) {
+          // random number 0-1
+          randomIndex = Math.floor(Math.random() * currentIndex);
+          currentIndex -= 1;
+          // And swap
+          temporaryValue = array[currentIndex];
+          array[currentIndex] = array[randomIndex];
+          array[randomIndex] = temporaryValue;
+        }
+        return array;
+}
+
+      numPlayersInput.addEventListener("change", function () {
+      const numPlayers = numPlayersInput.value;
+      playerInputsDiv.innerHTML = "";
+      for (let i = 0; i < numPlayers; i++) {
+        const div = document.createElement("div");
+        div.className = "form-group";
+        const label = document.createElement("label");
+        label.textContent = `Enter player/team ${i + 1} name:`;
+        const input = document.createElement("input");
+        input.id = `player${i + 1}`;
+        div.appendChild(label);
+        div.appendChild(input);
+        playerInputsDiv.appendChild(div);
+      }
+      // Set focus on the first newly created input box
+      if (numPlayers > 0) {
+        document.getElementById(`player1`).focus();
+      }
+    });
 
       numPlayersInput.addEventListener("input", validateNumPlayersInput);
       numRoundsInput.addEventListener("input", validateNumRoundsInput);
@@ -227,13 +241,16 @@
           players.push(playerInput.value);
         }
         combinations = [];
-        for (let i = 0; i < numRounds; i++) {
-          for (let j = 0; j < players.length; j++) {
-            for (let k = j + 1; k < players.length; k++) {
-              combinations.push([players[j], players[k]]);
+          for (let i = 0; i < numRounds; i++) {
+            for (let j = 0; j < players.length; j++) {
+              for (let k = j + 1; k < players.length; k++) {
+                combinations.push([players[j], players[k]]);
+              }
             }
           }
-        }
+        // Shuffle the combinations
+        combinations = shuffle(combinations);
+
         scheduleDiv.innerHTML = "";
         matchInputsDiv.innerHTML = "";
 
