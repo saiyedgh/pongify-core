@@ -7,7 +7,7 @@
 - Pongify only features games and tournaments for 2 to 5 players.
 <br>
 
-## Run the program
+### Run the program
 
 - Copy all the contents of the `pongify.py` file, then paste the content into a Google Collab python file.
 - Or, install the `Python` extension on **VS Code** and run using the *play* button icon on the top right corner of VS Code.
@@ -15,16 +15,32 @@
 
 <br>
 
+### App Modules and Logic:
 Pongify's code logic is divided into three main parts:
-## Part 01 - Scheduler
+#### Part 01 - Scheduler
 - Firstly, it takes user input for the number of players, from *two* to *five*.
 - Based on the number of players, it asks the name of each player, capturing the player names in a list called "**players**".
 
 - Pongify then asks for number of rounds which decides how many matches will the players play with the other(s).
 - The program then creates player combinations using Python [itertools](https://docs.python.org/3/library/itertools.html) library.
+
+##### Update v2.0
+Added constraints to the schedule logic, where:
+1.  The same players/teams cannot play two matches in a row.
+
+Example:
+- player01 vs player02 
+- player01 vs player 02 again :x:
+
+2. Individual player/team cannot have more than two matches in a row.
+
+Example:
+- player01 vs player03
+- player01 vs player02
+- player01 :x: vs player03
 <br>
 
-## Part 02 - Points Table
+#### Part 02 - Points Table
 
 Pongify then creates a points table (a 2d list) to account for:
 
@@ -36,7 +52,7 @@ Pongify then creates a points table (a 2d list) to account for:
 - Total player "**Points**" - 3 points for each win.
 <br>
 
-## Part 03 - Match Results and Player Standing
+#### Part 03 - Match Results and Player Standing
 
 - Pongify then calculates results, match by match.
 - It asks for match results doumenting each player's score.
@@ -48,7 +64,7 @@ Pongify then creates a points table (a 2d list) to account for:
 - Table tennis rules [https://www.pongfit.org/official-rules-of-table-tennis](https://www.pongfit.org/official-rules-of-table-tennis).
 - At 11 points if a player has a two point advantage, they win.
 
-## Example Tournament
+### Example Tournament
 
 **To test the program, following is a sample game scenario:**
 
@@ -72,11 +88,7 @@ Pongify then creates a points table (a 2d list) to account for:
 ## Limitations and upcoming Improvements
 
 - Is limited to single player names not doubles or teams, can be improved to incorporate teams and member names.
-- The current setup does not support editing/updating or deleting results, can add that functionality.
-- The command line interface is not user friendly, can use **Flask** or **Django** to create a web based UI written in Python.
-- Need to improve code validation.
-- Can validate and make sure player names are only strings.
-- Can store calculation logic in a function and use it for the other.
-- The list is not sorted based on results and standings.
-- The final points table rows can be sorted based on points and points difference.
+- Cannot go back and edit player names.
+- Does not have a way to save and share the results (download as img etc).
+
 
