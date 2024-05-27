@@ -1,4 +1,4 @@
-# Pongify - your table tennis game manager
+# Pongify - your mutiplayer game manager
 
 ## Documentation
 
