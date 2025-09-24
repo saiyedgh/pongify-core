@@ -1,5 +1,7 @@
 # Pongify - your mutiplayer game manager
 
+[https://saiyedgh.github.io/pongify-core/](https://saiyedgh.github.io/pongify-core/)
+
 ## Documentation
 
 - Pongify is a program written in vanilla Python – majority of the code.
